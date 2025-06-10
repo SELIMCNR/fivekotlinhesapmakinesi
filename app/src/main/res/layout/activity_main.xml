@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- Üst Toolbar -->
+
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@color/secondaryColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/main_menu"
+
+        app:title="Hesap Makinesi"
+        app:titleTextColor="@color/buttonTextColor" />
+
+
+    <!-- Drawer Layout (Geçmiş Paneli) -->
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- İçerik -->
+        <LinearLayout
+            android:id="@+id/historyPanel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/backgroundLight"
+            android:layout_gravity="start"
+
+        android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/historyTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="İşlem Geçmişi"
+                android:textSize="20sp"
+                android:textColor="@color/backgroundDark"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/historyContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/backgroundDark"
+                android:text="Henüz işlem geçmişi yok..."
+                android:textSize="18sp" />
+        </LinearLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+    <!-- 📌 İşlem Alanı -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="İşlem giriniz (örn: 5+3)"
+        app:boxBackgroundMode="outline"
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topAppBar">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditTextIslem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- 📌 Bilimsel Butonlar (3 Satır, 5 Sütun) -->
+    <GridLayout
+        android:id="@+id/scientificButtons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:columnCount="5"
+        android:rowCount="3"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSinCos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="75dp"
+            android:backgroundTint="@color/buttonColor"
+            android:onClick="ekleKarakter"
+            android:text="sin"
+            android:textColor="@color/buttonTextColor"
+            android:textSize="12sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="75dp"
+            android:backgroundTint="@color/buttonColor"
+            android:onClick="ekleKarakter"
+            android:text="cos"
+            android:textColor="@color/buttonTextColor"
+            android:textSize="12sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="75dp"
+            android:backgroundTint="@color/buttonColor"
+            android:onClick="ekleKarakter"
+            android:text="tan"
+            android:textColor="@color/buttonTextColor"
+            android:textSize="12sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="75dp"
+            android:backgroundTint="@color/buttonColor"
+            android:onClick="ekleKarakter"
+            android:text="log"
+            android:textColor="@color/buttonTextColor"
+            android:textSize="12sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="75dp"
+            android:backgroundTint="@color/buttonColor"
+            android:onClick="ekleKarakter"
+            android:text="ln"
+            android:textColor="@color/buttonTextColor"
+            android:textSize="12sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="75dp"
+            android:backgroundTint="@color/buttonColor"
+            android:onClick="ekleKarakter"
+            android:text="("
+            android:textColor="@color/buttonTextColor"
+            android:textSize="12sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="75dp"
+            android:backgroundTint="@color/buttonColor"
+            android:onClick="ekleKarakter"
+            android:text=")"
+            android:textColor="@color/buttonTextColor"
+            android:textSize="12sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="75dp"
+            android:backgroundTint="@color/buttonColor"
+            android:onClick="ekleKarakter"
+            android:text="^"
+            android:textColor="@color/buttonTextColor"
+            android:textSize="12sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="75dp"
+            android:backgroundTint="@color/buttonColor"
+            android:onClick="ekleKarakter"
+            android:text="√"
+            android:textColor="@color/buttonTextColor"
+            android:textSize="12sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="75dp"
+            android:backgroundTint="@color/buttonColor"
+            android:onClick="ekleKarakter"
+            android:text="!"
+            android:textColor="@color/buttonTextColor"
+            android:textSize="12sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="75dp"
+            android:backgroundTint="@color/buttonColor"
+            android:onClick="ekleKarakter"
+            android:text="π"
+            android:textColor="@color/buttonTextColor"
+            android:textSize="12sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="75dp"
+            android:backgroundTint="@color/buttonColor"
+            android:onClick="ekleKarakter"
+            android:text="e"
+            android:textColor="@color/buttonTextColor"
+            android:textSize="12sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="75dp"
+            android:backgroundTint="@color/buttonColor"
+            android:onClick="ekleKarakter"
+            android:text="inv"
+            android:textColor="@color/buttonTextColor"
+            android:textSize="12sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="75dp"
+            android:backgroundTint="@color/buttonColor"
+            android:onClick="ekleKarakter"
+            android:text="rad"
+            android:textColor="@color/buttonTextColor"
+            android:textSize="12sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="75dp"
+            android:backgroundTint="@color/buttonColor"
+            android:onClick="ekleKarakter"
+            android:text="deg"
+            android:textColor="@color/buttonTextColor"
+            android:textSize="12sp" />
+    </GridLayout>
+
+    <!-- 📌 Bilimsel Butonları Aç/Kapat -->
+    <Button
+        android:id="@+id/buttonSinCos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="75dp"
+        android:backgroundTint="@color/buttonColor"
+        android:onClick="buttonSinCos"
+        android:textColor="@color/buttonTextColor"
+        app:icon="@drawable/menu__1_"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scientificButtons" />
+
+
+    <LinearLayout
+        android:id="@+id/numericPad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSinCos">
+
+        <!-- Üst Satır: Temizleme, Silme ve Yüzde İşlemleri -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonC"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="temizleIslem"
+                android:text="C"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="30sp"
+                app:backgroundTint="@color/buttonColor" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonTekSil"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="silKarakter"
+                android:text="←"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="30sp"
+                app:backgroundTint="@color/buttonColor" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonYuzde"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ekleKarakter"
+                android:text="%"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="30sp"
+                app:backgroundTint="@color/buttonColor" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonBolme"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ekleKarakter"
+                android:text="/"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="30sp"
+                app:backgroundTint="@color/buttonColor" />
+        </LinearLayout>
+
+        <!-- İkinci Satır: Sayılar 1-9 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ekleKarakter"
+                android:text="1"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="30sp"
+                app:backgroundTint="@color/buttonColor" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ekleKarakter"
+                android:text="2"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="30sp"
+                app:backgroundTint="@color/buttonColor" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ekleKarakter"
+                android:text="3"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="30sp"
+                app:backgroundTint="@color/buttonColor" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonCarp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ekleKarakter"
+                android:text="*"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="30sp"
+                app:backgroundTint="@color/buttonColor" />
+        </LinearLayout>
+
+        <!-- Üçüncü Satır: 4-6 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ekleKarakter"
+                android:text="4"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="30sp"
+                app:backgroundTint="@color/buttonColor" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ekleKarakter"
+                android:text="5"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="30sp"
+                app:backgroundTint="@color/buttonColor" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ekleKarakter"
+                android:text="6"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="30sp"
+                app:backgroundTint="@color/buttonColor" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonEksi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ekleKarakter"
+                android:text="-"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="30sp"
+                app:backgroundTint="@color/buttonColor" />
+        </LinearLayout>
+
+        <!-- Dördüncü Satır: 7-9 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ekleKarakter"
+                android:text="7"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="30sp"
+                app:backgroundTint="@color/buttonColor" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ekleKarakter"
+                android:text="8"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="30sp"
+                app:backgroundTint="@color/buttonColor" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ekleKarakter"
+                android:text="9"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="30sp"
+                app:backgroundTint="@color/buttonColor" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonTopla"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ekleKarakter"
+                android:text="+"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="30sp"
+                app:backgroundTint="@color/buttonColor" />
+        </LinearLayout>
+
+        <!-- Beşinci Satır: 00, 0, = Tuşları -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button00"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ekleKarakter"
+                android:text="00"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="30sp"
+                app:backgroundTint="@color/buttonColor" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button0"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ekleKarakter"
+                android:text="0"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="30sp"
+                app:backgroundTint="@color/buttonColor" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonVirgul"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ekleKarakter"
+                android:text="."
+                android:textColor="@color/buttonTextColor"
+                android:textSize="30sp"
+                app:backgroundTint="@color/buttonColor" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonEsittir"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="hesaplaIslem"
+                android:text="="
+                android:textColor="@color/buttonTextColor"
+                android:textSize="30sp"
+                app:backgroundTint="@color/buttonColor" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+
+        android:layout_marginTop="200dp"
+        android:backgroundTint="@color/buttonColor"
+        android:onClick="toggleDrawer"
+        android:textColor="@color/buttonTextColor"
+        android:textSize="20sp"
+        android:tint="@color/buttonColor"
+
+        app:icon="@drawable/history__1_"
+        app:layout_constraintBottom_toBottomOf="@+id/scientificButtons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
