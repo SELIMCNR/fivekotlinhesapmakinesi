@@ -64,4 +64,3 @@ This project is a **modern calculator application** developed with **Android Kot
 📌 **Custom calculation history management**  
 📌 **Enhanced UI optimizations**  
 
-# fivekotlinCalculator
